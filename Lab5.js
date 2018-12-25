@@ -23,6 +23,6 @@ class Sort{
         }
     }
 }
-let array = new Sort()
-console.log(array.HeapSort([5, 10, 9, 101]))
-console.log(array.HeapSort(["5", "10", "9", "101"]))
+let array = new Sort();
+console.log(array.HeapSort([5, 10, 9, 101]));
+console.log(array.HeapSort(["5", "10", "9", "101"]));
