@@ -1,46 +1,52 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
 
-        Double doubleData[] = {1.0,2.0,3.0,4.0,5.0};
-        double target = 4.6;
+        Integer intArray[] = {5, 10, 9, 101};
+        Byte byteArray[] = {5, 10, 9, 101};
 
-        BinarySort<Double, Double> sort = new BinarySort<>();
-        sort.binary(doubleData, target);
+        Sort<Integer> intSort = new Sort<>();
+        intSort.heapSort(intArray);
 
-        Integer intData[] = {1, 2, 3, 4, 5};
+        for (Integer a : intArray) {
+            System.out.print(a + " ");
+        }
 
-        BinarySort<Integer, Double> sort1 = new BinarySort<>();
-        sort.binary(doubleData, target);
+        System.out.println();
+
+        Sort<Byte> byteSort = new Sort<>();
+        byteSort.heapSort(byteArray);
+
+        for (Byte a : byteArray) {
+            System.out.print(a + " ");
+        }
 
     }
 }
 
-class BinarySort < T extends Number, V extends Number> {
-
-    public void binary(T[] data, T target){
-        binarySearch(data, target, 0, data.length-1);
-    }
-    private T binarySearch(T[] data, T target, int start, int end){
-        System.out.println(data[start]+ "-" +data[end]);
-        if(end < 1){
-            return data[0];
+class Sort < T extends Number > {
+        public T[] heapSort(T[] arr){
+            if (arr.length == 0) return null;
+            int n = arr.length;
+            int i = (int) Math.floor(n/2), j, k;
+            Number t;
+            while (true){
+                if (i > 0) t = arr[--i];
+                else{ n--;
+                    if (n == 0) return arr;
+                    t = arr[n];
+                    arr[n] = arr[0];
+                }
+                j = i;
+                k = j*2+1;
+                while (k < n){
+                    if (k+1 < n && arr[k+1].doubleValue() > arr[k].doubleValue()) k++;
+                    if (arr[k].doubleValue() > t.doubleValue()){
+                        arr[j] = arr[k];  j = k;  k = j*2+1;
+                    }
+                    else break;
+                }
+                arr[j] = (T) t;
+            }
         }
-            int middle = (int) Math.floor(start + (end - start)/2);
-        if (target == data[middle]){
-            return data[middle];
-        }
-        if (end - 1 == start){
-            return Math.abs(data[start].doubleValue() - target.doubleValue())
-                    > Math.abs(data[end].doubleValue() - target.doubleValue()) ? data[end] : data[start];
-        }
-        if (target.doubleValue() > data[middle].doubleValue()){
-            return binarySearch(data,target,middle,end);
-        }
-        if (target.doubleValue() < data[middle].doubleValue()){
-            return binarySearch(data,target,start,middle);
-        }
-        return target;
-    }    
 }
