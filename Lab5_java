@@ -1,0 +1,46 @@
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+
+        Double doubleData[] = {1.0,2.0,3.0,4.0,5.0};
+        double target = 4.6;
+
+        BinarySort<Double, Double> sort = new BinarySort<>();
+        sort.binary(doubleData, target);
+
+        Integer intData[] = {1, 2, 3, 4, 5};
+
+        BinarySort<Integer, Double> sort1 = new BinarySort<>();
+        sort.binary(doubleData, target);
+
+    }
+}
+
+class BinarySort < T extends Number, V extends Number> {
+
+    public void binary(T[] data, T target){
+        binarySearch(data, target, 0, data.length-1);
+    }
+    private T binarySearch(T[] data, T target, int start, int end){
+        System.out.println(data[start]+ "-" +data[end]);
+        if(end < 1){
+            return data[0];
+        }
+            int middle = (int) Math.floor(start + (end - start)/2);
+        if (target == data[middle]){
+            return data[middle];
+        }
+        if (end - 1 == start){
+            return Math.abs(data[start].doubleValue() - target.doubleValue())
+                    > Math.abs(data[end].doubleValue() - target.doubleValue()) ? data[end] : data[start];
+        }
+        if (target.doubleValue() > data[middle].doubleValue()){
+            return binarySearch(data,target,middle,end);
+        }
+        if (target.doubleValue() < data[middle].doubleValue()){
+            return binarySearch(data,target,start,middle);
+        }
+        return target;
+    }    
+}
